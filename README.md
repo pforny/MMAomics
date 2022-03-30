@@ -20,7 +20,7 @@ The code is structured according to the figures as presented in the paper.
 2. Biochemical assessment of MMUT activity and propionate incorporation activity supports diagnosis of affected individuals.
 3. Expression outlier analysis reveals causative genes in specific disease samples.
 4. The clinical severity score and propionate incorporation activity are associated with several phenotypic traits.
-5. Global computational approaches to transcriptomics and proteotyping datasets failed to stratify samples into disease and non-disease groups.
+5. Global computational approaches to transcriptomics and proteotyping datasets were unable to stratify samples into disease and non-disease groups.
 6. Transcriptomics analysis of mouse brain revealed sample clustering according to genotype.
 7. Significantly dysregulated proteins were enriched for for mitochondrial localization.
 8. Transcript-protein and protein-protein correlation analysis illustrates coordinated regulation of MMUT with most TCA transcripts and proteins.
