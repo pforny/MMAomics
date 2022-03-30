@@ -1,3 +1,16 @@
+# ignore subfolders/files
+Results/
+csrproject/
+Data/
+data_for_patrick/
+Figs/
+interimData/
+
+.DS_Store
+.RData
+.Rhistory
+.gitignore
+
 # History files
 .Rhistory
 .Rapp.history
