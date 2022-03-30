@@ -52,6 +52,7 @@ myids2=sub("\\..+","",myids)
 rnafiltered_mat=rnaseq_mat[is.element(rownames(rnaseq_mat),myids2),]
 rnafiltered_mat=rnafiltered_mat[rowSums(rnafiltered_mat==0)<dim(rnafiltered_mat)[2]/2,]
 save(rnafiltered_mat,file="interimData/rnafiltered_mat.RData")
+write.csv(rnafiltered_mat, file="interimData/rnafiltered_mat.csv", row.names=TRUE, quote=FALSE)
 ####################################
 # write gene mapping file
 ####################################
