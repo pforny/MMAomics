@@ -26,7 +26,7 @@ write.table(EE2,file="interimData/gene_sets/enzyme_sec.txt",sep="\t",quote=FALSE
 # perl -nle '/(\w+),\s(\w+_HUMAN)/ && print "$1\t$2"' > Data/genesets/all_enzyme_ids2.tbl
 
 #mitochondrian direct
-# UniProt search Subcellular localistions: mitochondrian
+# UniProt search Subcellular localistions: mitochondrion
 
 #http://golr-aux.geneontology.io/solr/select?defType=edismax&qt=standard&indent=on&wt=csv&rows=100000&start=0&fl=bioentity,bioentity_name,qualifier,annotation_class,annotation_extension_json,assigned_by,taxon,evidence_type,evidence_with,panther_family,type,bioentity_isoform,reference,date&facet=true&facet.mincount=1&facet.sort=count&json.nl=arrarr&facet.limit=25&hl=true&hl.simple.pre=%3Cem%20class=%22hilite%22%3E&hl.snippets=1000&csv.encapsulator=&csv.separator=%09&csv.header=false&csv.mv.separator=%7C&fq=document_category:%22annotation%22&fq=regulates_closure:%22GO:0005739%22&fq=taxon_subset_closure_label:%22Homo%20sapiens%22&facet.field=aspect&facet.field=taxon_subset_closure_label&facet.field=type&facet.field=evidence_subset_closure_label&facet.field=regulates_closure_label&facet.field=annotation_class_label&facet.field=qualifier&facet.field=annotation_extension_class_closure_label&facet.field=assigned_by&facet.field=panther_family_label&q=*:*
 #######

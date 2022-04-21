@@ -12,31 +12,7 @@ library(patchwork)
 library(matrixTests)
 library(viridis)
 
-# library(MultiAssayExperiment)
 
-# library(EnsDb.Hsapiens.v79)
-
-#colour_palette
-##blue 
-#82
-#129
-#163
-myblue=rgb(60, 107, 131, maxColorValue = 255)
-#orange
-#231
-#129
-#48
-myorange=rgb(231, 129, 48, maxColorValue = 255)
-#brown
-#180
-#100
-#36
-mybrown=rgb(180, 100, 36, maxColorValue = 255)
-#mygrey
-#212
-#212
-#212
-mygrey=rgb(180, 180, 180, maxColorValue = 255)
 
 mypal <- pal_aaas("default", alpha = 1)(9)
 
@@ -222,40 +198,40 @@ dev.off()
 
 # correlation of samples among each other
 
-# p_correlo_dat <- cor(prot_exp_samples_norm, use = "complete.obs", method = "pearson")
-# rownames(p_correlo_dat) <- as.numeric(sub("MMA", "", rownames(p_correlo_dat)))
-# colnames(p_correlo_dat) <- as.numeric(sub("MMA", "", colnames(p_correlo_dat)))
-# # p_p_mat <- cor_pmat(prot_exp_samples)
+p_correlo_dat <- cor(prot_exp_samples_norm, use = "complete.obs", method = "pearson")
+rownames(p_correlo_dat) <- as.numeric(sub("MMA", "", rownames(p_correlo_dat)))
+colnames(p_correlo_dat) <- as.numeric(sub("MMA", "", colnames(p_correlo_dat)))
+# p_p_mat <- cor_pmat(prot_exp_samples)
 
-# p_correlo <- 
-# ggcorrplot(p_correlo_dat,
-# 	outline.col = NA,
-# 	hc.order = FALSE,
-# 	type = "full",
-# 	title = "prot_corr_samples_pearson")
-# p_correlo <- p_correlo +
-# 	rotate_x_text(angle = 90) + theme(axis.text.x = element_text(size = 10), axis.text.y = element_text(size = 10))
+p_correlo <- 
+ggcorrplot(p_correlo_dat,
+	outline.col = NA,
+	hc.order = FALSE,
+	type = "full",
+	title = "prot_corr_samples_pearson")
+p_correlo <- p_correlo +
+	rotate_x_text(angle = 90) + theme(axis.text.x = element_text(size = 10), axis.text.y = element_text(size = 10))
 
-# ggsave(paste(fig_path,"prot_corr_samples.png", sep = ""), p_correlo, device = png(), width = 160, height = 160, units = c("mm"), dpi = 600)
-# dev.off()
+ggsave(paste(fig_path,"prot_corr_samples.png", sep = ""), p_correlo, device = png(), width = 160, height = 160, units = c("mm"), dpi = 600)
+dev.off()
 
 
 # correlation of proteins among each other
 
-# p_correlo_dat1 <- cor(prot_exp_prots, use = "complete.obs", method = "pearson")
-# # p_p_mat1 <- cor_pmat(prot_exp_prots)
+p_correlo_dat1 <- cor(prot_exp_prots, use = "complete.obs", method = "pearson")
+# p_p_mat1 <- cor_pmat(prot_exp_prots)
 
-# p_correlo1 <- 
-# ggcorrplot(p_correlo_dat1,
-# 	outline.col = NA,
-# 	hc.order = TRUE,
-# 	type = "full",
-# 	title = "prot_corr_proteins_ALL_pearson")  +
-# 	rotate_x_text(angle = 90) + 
-# 	theme(axis.text.x = element_text(size = 10), axis.text.y = element_text(size = 10))
+p_correlo1 <- 
+ggcorrplot(p_correlo_dat1,
+	outline.col = NA,
+	hc.order = TRUE,
+	type = "full",
+	title = "prot_corr_proteins_ALL_pearson")  +
+	rotate_x_text(angle = 90) + 
+	theme(axis.text.x = element_text(size = 10), axis.text.y = element_text(size = 10))
 
-# ggsave(paste(fig_path,"prot_corr_proteins_ALL.png", sep = ""), p_correlo1, device = png(), width = 160, height = 160, units = c("mm"), dpi = 300)
-# dev.off()
+ggsave(paste(fig_path,"prot_corr_proteins_ALL.png", sep = ""), p_correlo1, device = png(), width = 160, height = 160, units = c("mm"), dpi = 300)
+dev.off()
 
 
 p_correlo_dat1_MMUT <- cor(prot_exp_prots[1:150, ], use = "complete.obs", method = "spearman")
@@ -290,39 +266,39 @@ dev.off()
 
 # correlation of samples among each other
 
-# r_correlo_dat <- cor(rna_exp_samples, use = "complete.obs", method = "pearson")
-# nrow(r_correlo_dat)
-# # rownames(r_correlo_dat) <- sub("MMA", "", rownames(r_correlo_dat))
-# # colnames(r_correlo_dat) <- sub("MMA", "", colnames(r_correlo_dat))
-# r_p_mat <- cor_pmat(rna_exp_samples)
+r_correlo_dat <- cor(rna_exp_samples, use = "complete.obs", method = "pearson")
+nrow(r_correlo_dat)
+# rownames(r_correlo_dat) <- sub("MMA", "", rownames(r_correlo_dat))
+# colnames(r_correlo_dat) <- sub("MMA", "", colnames(r_correlo_dat))
+r_p_mat <- cor_pmat(rna_exp_samples)
 
-# r_correlo <- 
-# ggcorrplot(r_correlo_dat,
-# 	outline.col = NA,
-# 	hc.order = FALSE,
-# 	type = "full",
-# 	title = "rna_corr_samples_pearson")
-# r_correlo <- r_correlo +
-# 	rotate_x_text(angle = 90)
+r_correlo <- 
+ggcorrplot(r_correlo_dat,
+	outline.col = NA,
+	hc.order = FALSE,
+	type = "full",
+	title = "rna_corr_samples_pearson")
+r_correlo <- r_correlo +
+	rotate_x_text(angle = 90)
 
-# ggsave(paste(fig_path,"rna_corr_samples.png", sep = ""), r_correlo, device = png(), width = 160, height = 160, units = c("mm"), dpi = 600)
-# dev.off()
+ggsave(paste(fig_path,"rna_corr_samples.png", sep = ""), r_correlo, device = png(), width = 160, height = 160, units = c("mm"), dpi = 600)
+dev.off()
 
 
 # correlation of transcripts among each other
 
-# r_correlo_dat1 <- cor(rna_exp_rnas, use = "complete.obs", method = "pearson")
-# # r_p_mat1 <- cor_pmat(rna_exp_rnas)
+r_correlo_dat1 <- cor(rna_exp_rnas, use = "complete.obs", method = "pearson")
+# r_p_mat1 <- cor_pmat(rna_exp_rnas)
 
-# r_correlo1 <- 
-# ggcorrplot(r_correlo_dat1,
-# 	outline.col = NA,
-# 	hc.order = TRUE,
-# 	type = "full",
-# 	title = "rna_corr_rnas_ALL_pearson")
+r_correlo1 <- 
+ggcorrplot(r_correlo_dat1,
+	outline.col = NA,
+	hc.order = TRUE,
+	type = "full",
+	title = "rna_corr_rnas_ALL_pearson")
 
-# ggsave(paste(fig_path,"rna_corr_rnas_ALL.png", sep = ""), r_correlo1, device = png(), width = 160, height = 160, units = c("mm"), dpi = 300)
-# dev.off() # takes a lot of memory to compute/generate image file
+ggsave(paste(fig_path,"rna_corr_rnas_ALL.png", sep = ""), r_correlo1, device = png(), width = 160, height = 160, units = c("mm"), dpi = 300)
+dev.off() # takes a lot of memory to compute/generate image file
 
 
 r_correlo_dat1_MMUT <- cor(rna_exp_rnas[1:143, ], use = "complete.obs", method = "spearman")

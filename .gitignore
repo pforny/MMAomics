@@ -1,8 +1,6 @@
 # ignore subfolders/files
 Results/
 csrproject/
-Data/
-data_for_patrick/
 Figs/
 interimData/
 

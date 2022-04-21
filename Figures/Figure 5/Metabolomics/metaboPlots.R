@@ -42,11 +42,6 @@ tbl_calc <- data.table(read_excel("Data/metaboDat/intra/froese1 DIFF DATA.xlsx",
 setnames(tbl_calc, c("difference", "ionIdx", "index diff", "log2_fc","p_val","p_val_adj","pFDR","q_value","m_z","hmdb_id","kegg_id","other_id", "name","mz difference","formula","ion","annotation score"))
 
 
-
-
-# import file, exclude EXP3
-# met_EXP123_df <- read_excel("froese1 DATA CURATED NORM_PF.xlsx", sheet="intensities1")
-
 metabo_int <- fread("Data/metaboDat/intra/intracell_intensities1.csv")
 metabo_int <- metabo_int %>%
   select(ionIdx, ionMz, contains("E1"), contains("E2"))
@@ -140,11 +135,6 @@ metabo_biorep_spread <- data.table(metabo_biorep_spread)
 metabo_biorep_spread$type <- factor(metabo_biorep_spread$type)
 levels(metabo_biorep_spread$type) <- c("control", "MMUT def.")
 
-
-
-# # test if still yielding meaningful results
-# ggplot(melt(metabo_biorep_spread[,c("type", "2-Methylcitric acid")], id.vars = "type"), aes(x = type, y = value)) +
-#   geom_point()
 
 ##################################
 # load protein matrix
@@ -284,18 +274,6 @@ ggplot(df_met_pca, aes(x = PC1, y = PC2, color = type)) +
   theme_pubr() +
   theme(plot.title = element_text(size = 12), legend.title = element_blank(), legend.position = "right")
 
-# df_met_pca <- data.table(df_met_pca)
-# pcs_and_type <- c("PC1", "PC2", "PC3", "PC4", "PC5", "PC6", "PC7", "PC8", "PC9", "PC10", "PC11", "PC12", "PC13", "PC14", "PC15", "PC16", "PC17", "PC18", "PC19", "PC20", "type")
-
-# df_met_pca_melt <- melt.data.table(df_met_pca[, ..pcs_and_type])
-# setnames(df_met_pca_melt, c("type", "PC", "value"))
-
-# g_prot_pca_dens <- 
-# ggplot(df_met_pca_melt, aes(x = value, color = type, fill = type)) +
-#     geom_density(alpha = 0.5) +
-#     facet_wrap(.~PC) +
-#     ggtitle("Single PCs") +
-#     theme_bw()
 
 met_pca <- 
 ggarrange(met_pca_plt, scree_plot, widths = c(1.2, 1))
@@ -305,74 +283,6 @@ ggsave(paste(fig_path, "met_pca.png", sep = ""), met_pca, device = png(), width 
 dev.off()
 ggsave(paste(fig_path_pdf, "SuppFig6/", "met_pca.pdf", sep = ""), met_pca, device = "pdf", width = 7, height = 3)
 dev.off()
-
-
-
-########################################################################
-# biological replicates
-
-# pca_tbl <- metabo_biorep_spread
-# row.names(pca_tbl) <- paste(pca_tbl$type, pca_tbl$mmaid, sep = "_")
-# colnames(metabo_biorep_spread)[1:10]
-
-
-# pca_tbl$mmaid <- NULL
-# pca_tbl$cellname <- NULL
-# pca_tbl$type <- NULL
-
-
-# pca_tbl2 <- scalerRound(pca_tbl, 7)
-# pca_tbl2 <- data.table(pca_tbl2)
-
-# hist(pca_tbl[[500]], breaks = 30)
-# hist(pca_tbl2[[500]], breaks = 30)
-
-# # PCA plot
-# met_pca <- prcomp(pca_tbl2)
-# plot(met_pca$x[,1], met_pca$x[,2])
-
-# df_met_pca <- as.data.frame(met_pca$x)
-# df_met_pca$no <- row.names(pca_tbl)
-# df_met_pca$type <- sub("_.*", "", df_met_pca$no)
-
-# #calculate percentages
-# perc_met_pca <- vector("character", nrow(met_pca$x))
-
-# for(i in 1:nrow(met_pca$x)) {
-#   perc_met_pca[i] <- round(((met_pca$sdev[i])^2) / sum(met_pca$sdev^2) * 100, 2)
-#   perc_met_pca[i] <- paste(colnames(df_met_pca)[i], " (", paste(as.character(perc_met_pca[i]), "%", ")", sep = ""), sep = "")
-# }
-
-# # scree plot with package factoextra
-# scree_plot0 <- fviz_eig(met_pca)
-
-# scree_plot <- 
-#   scree_plot0 +
-#   theme_pubr() +
-#   theme(plot.title = element_text(size = 12))
-
-
-
-# met_pca_plt <-
-# ggplot(df_met_pca, aes(x = PC1, y = PC2, color = type)) +
-#   geom_point() +
-#   ggtitle("Metabolomics PCA") +
-#   xlab(perc_met_pca[1]) +
-#   ylab(perc_met_pca[2]) +
-#   scale_color_aaas() +
-#   theme_pubr() +
-#   theme(plot.title = element_text(size = 12), legend.title = element_blank(), legend.position = "right")
-
-
-# met_pca <- 
-# ggarrange(met_pca_plt, scree_plot, widths = c(1.2, 1))
-
-
-# ggsave(paste(fig_path, "met_pca2.png", sep = ""), met_pca, device = png(), width = 7, height = 3)
-# dev.off()
-
-
-
 
 
 
@@ -892,26 +802,6 @@ ggplot(metabo_samplerep_spread, aes(x = Glutamate/10e6, y =  Aspartate/10e4, col
   labs(y="Aspartate", x="Glutamate") +
   theme_test()
 
-
-
-# p_GLUD1_Glu_2 <- 
-# ggplot(dt2, aes(x = p_GLUD1/10e4, y = Glutamate/10e6, color = type)) +
-#   geom_point() +
-#   geom_smooth(method = lm, se = FALSE) +
-#   stat_cor(p.accuracy = 0.001, r.accuracy = 0.01, size = 3, cor.coef.name = "rho", label.x.npc = "left", label.y.npc = 0.15, hjust = 0, show.legend = FALSE)+
-#   scale_color_aaas() +
-#   labs(y="Glutamate", x="GLUD1 protein") +
-#   theme_test()
-
-
-# p_OGDH_Gln_2 <- 
-# ggplot(dt2, aes(x = p_OGDH/10e5, y = Glutamate/10e6, color = type)) +
-#   geom_point() +
-#   geom_smooth(method = lm, se = FALSE) +
-#   stat_cor(p.accuracy = 0.001, r.accuracy = 0.01, size = 3, cor.coef.name = "rho", label.x.npc = "right", label.y.npc = 0.15, hjust = 1, show.legend = FALSE)+
-#   scale_color_aaas() +
-#   labs(y="Glutamate", x="OGDH protein") +
-#   theme_test()
 
 
 r_MMUT_ketoglt_2 <- 

@@ -1,40 +1,4 @@
 
-##ftp://ftp.ebi.ac.uk/pub/databases/chebi/ontology/chebi.obo
-
-# more /Users/davidlamparter/Documents/workspace/Fcbg/mapMetabolites/testdata/metaboliteDBs/chebi.obo | perl -nle '/(^id:|is_conjugate|is_tautomer)/ && print' | perl -pe 's/\n/\t/mg' > /Users/davidlamparter/Documents/workspace/Fcbg/mapMetabolites/results/chebi_tmp_obo.txt
-#more /Users/davidlamparter/Documents/workspace/Fcbg/mapMetabolites/results/chebi_tmp_obo.txt | perl -pe 's/\tid: CHEBI/\nid: CHEBI/mg' | grep "is_conjugate" | perl -nle '/(CHEBI:\d+).+(base|acid).+(CHEBI:\d+)/ && print "$1\t$2\t$3"' > /Users/davidlamparter/Documents/workspace/Fcbg/mapMetabolites/results/chebi_obo.txt 
-
-
-#more /Users/davidlamparter/Documents/workspace/Fcbg/mapMetabolites/results/chebi_tmp_obo.txt | perl -pe 's/\tid: CHEBI/\nid: CHEBI/mg' | grep "is_conjugate" |  grep "relationship" | perl -ple 's/\t	relationship: is_(conjugate_acid|conjugate_base|tautomer)_of /;/mg' > /Users/davidlamparter/Documents/workspace/Fcbg/mapMetabolites/results/chebi_obo.txt 
-
-
-#perl -nle '/(CHEBI:\d+).+(base|acid).+(CHEBI:\d+)/ && print "$1\t$2\t$3"' > /Users/davidlamparter/Documents/workspace/Fcbg/mapMetabolites/results/chebi_obo.txt 
-
-
-
-#colour_palette
-##blue 
-#82
-#129
-#163
-myblue=rgb(60, 107, 131, maxColorValue = 255)
-#orange
-#231
-#129
-#48
-myorange=rgb(231, 129, 48, maxColorValue = 255)
-#brown
-#180
-#100
-#36
-mybrown=rgb(180, 100, 36, maxColorValue = 255)
-#mygrey
-#212
-#212
-#212
-mygrey=rgb(180, 180, 180, maxColorValue = 255)
-
-
 USE_ATP=FALSE
 require(data.table)
 require(ggplot2)
@@ -70,33 +34,6 @@ write.csv(int_sheet, "Data/metaboDat/intra/intracell_ions.csv")
 
 int_annot <- read_excel("Data/metaboDat/intra/froese1 DATA CURATED NORM.xlsx", sheet = "annotation")
 write.csv(int_annot, "Data/metaboDat/intra/intracell_annotation.csv")
-
-
-
-######################################################################
-######################################################################
-## generate single csv files for each sheet of the raw extracell metabolomics file
-
-## input: froese2 DATA CURATED.xlsx
-##
-## output: intracell_intensities1.csv
-## output: intracell_injections.csv
-## output: intracell_ions.csv
-## output: intracell_annotation.csv
-######################################################################
-######################################################################
-
-int_sheet <- read_excel("Data/metaboDat/extra/froese2 DATA CURATED.xlsx", sheet = "intensities1")
-write.csv(int_sheet, "Data/metaboDat/extra/extracell_intensities1.csv")
-
-int_sheet <- read_excel("Data/metaboDat/extra/froese2 DATA CURATED.xlsx", sheet = "injections")
-write.csv(int_sheet, "Data/metaboDat/extra/extracell_injections.csv")
-
-int_sheet <- read_excel("Data/metaboDat/extra/froese2 DATA CURATED.xlsx", sheet = "ions")
-write.csv(int_sheet, "Data/metaboDat/extra/extracell_ions.csv")
-
-int_sheet <- read_excel("Data/metaboDat/extra/froese2 DATA CURATED.xlsx", sheet = "annotation")
-write.csv(int_sheet, "Data/metaboDat/extra/extracell_annotation.csv")
 
 
 
@@ -262,9 +199,7 @@ ion_annot_mat_raw=fread("Data/metaboDat/intra/intracell_annotation.csv")
 ionid2gname_tbl=getTbl(ion_annot_mat_raw)
 write.table(ionid2gname_tbl,file="interimData/metabo_annot/intraIonId2gname.tbl",sep="\t",quote=FALSE,row.names=FALSE,col.names=TRUE)
 
-ion_annot_mat_raw=fread("Data/metaboDat/extra/extracell_annotation.csv")
-ionid2gname_tbl=getTbl(ion_annot_mat_raw)
-write.table(ionid2gname_tbl,file="interimData/metabo_annot/extraIonId2gname.tbl",sep="\t",quote=FALSE,row.names=FALSE,col.names=TRUE)
+
 ######################################################################
 ######################################################################
 ## END: get ionid2gname_tbl

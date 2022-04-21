@@ -8,8 +8,8 @@ The repository is structured according to the figures as presented in the paper.
 
 ## Table of contents
 ### Figures
-1. Multi-facetted omics view enabled a molecular diagnosis.
-2. Phenomics analysis reveals two main surrogate markers of disease severity.
+1. Multi-facetted omics view enabled a molecular diagnosis in 84% of individuals.
+2. Phenomics analysis reveals two main surrogate markers of disease severity (clinical severity score and PI+ activity).
 3. Untargeted integration of omics data layers highlights the TCA cycle and associated pathways as well as oxidative phosphorylation gene sets to be dysregulated in MMA.
 4. Transcript-protein and protein-protein correlation analyses reveal coordinated relationships between MMUT and TCA genes and proteins but not their isoforms.
 5. Polar metabolomics in selected patient fibroblasts and glutamine tracing studies in CRISPR/Cas9 KO 293T cells highlight differential glutamine anaplerosis.

@@ -1,6 +1,8 @@
 require(data.table)
 pheno_tbl0=fread("less Data/phenotypic_tables/MMA_master_pheno_tbl_1_6_19.csv | perl -nle 'if($.>1){print}'")
 
+# alternatively the csv file provided in the extended data of the manuscript can be used.
+
 pheno_tbl=pheno_tbl0[,1:46,with=FALSE]
 pheno_tbl=pheno_tbl[!is.na(ID),]
 

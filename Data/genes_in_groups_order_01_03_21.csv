@@ -1,0 +1,37 @@
+CS;TCA
+ACO2;TCA
+IDH2;TCA
+IDH3B;TCA
+IDH3A;TCA
+IDH3G;TCA
+OGDH;TCA
+DLD;TCA
+DLST;TCA
+SUCLG1;TCA
+SUCLG2;TCA
+SUCLA2;TCA
+SDHA;TCA
+SDHB;TCA
+SDHC;TCA
+FH;TCA
+MDH2;TCA
+PDHA1;anaplerotic
+PDHB;anaplerotic
+PDHX;anaplerotic
+PDK1;anaplerotic
+PDP1;anaplerotic
+DLAT;anaplerotic
+PC;anaplerotic
+ADSL;anaplerotic
+GLUD1;anaplerotic glutamate
+GOT2;anaplerotic glutamate
+GLUL;anaplerotic glutamate
+GLS;anaplerotic glutamate
+ACLY;cataplerotic
+LDHA;pyruvate metabolism
+LDHB;pyruvate metabolism
+ACO1;Isoform
+IDH1;Isoform
+MDH1;Isoform
+GOT1;Isoform
+MMUT;is MMUT

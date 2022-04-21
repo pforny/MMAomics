@@ -15,28 +15,6 @@ library(ggplotify)
 
 tbl=fread("interimData/phenotypic_tables/meta_info_wcss.txt")
 
-#colour_palette
-##blue 
-#82
-#129
-#163
-myblue=rgb(60, 107, 131, maxColorValue = 255)
-#orange
-#231
-#129
-#48
-myorange=rgb(231, 129, 48, maxColorValue = 255)
-#brown
-#180
-#100
-#36
-mybrown=rgb(180, 100, 36, maxColorValue = 255)
-#mygrey
-#212
-#212
-#212
-mygrey=rgb(180, 180, 180, maxColorValue = 255)
-
 
 system("mkdir Figs/clinical")
 fig_path <- c("Figs/clinical/")
@@ -852,7 +830,7 @@ dev.off()
 summary(ESpval_mer2$ES)
 
 
-#≤
+#
 
 multi_reg_clinvars <- 
 ggplot(ESpval_mer2[ES > -1.2 & ES < 1.2, ], aes(x = pval_adj, y = ES, color = ES)) +
@@ -995,34 +973,6 @@ ggsave(paste(fig_path_pdf,"Fig2/","phenotype_variables_corrMatrix.pdf", sep = ""
 dev.off()
 
 
-# save_pheatmap_png <- function(x, filename, width = 1200, height = 1000, res = 150) {
-#   png(filename, width = width, height = height, res = res)
-#   grid::grid.newpage()
-#   grid::grid.draw(x$gtable)
-#   dev.off()
-# }
- 
-# save_pheatmap_png(clinical_cor_htmp, paste(fig_path, "phenotype_variables_corrMatrix.png", sep = ""), width = 2100, height = 2100, res = 150)
-
-
-#############################################################
-# IQ variable analysis
-tbl$IQ
-summary(tbl$IQ)
-ggplot(tbl, aes(x = IQ, fill = proposed_gene_wgs)) +
-	geom_histogram() +
-	theme_bw()
-
-ggsave(paste(fig_path,"IQ_distribution.png", sep = ""),width = 6, height = 2)
-
-ggplot(tbl[IQ>20, ], aes(x = IQ, y = OHCblPlus)) +
-	geom_point() +
-	geom_smooth(method = "lm") +
-	ggtitle("No relationship between IQ and OHCblPlus", subtitle = "Excluding two outliers at IQ == 20") +
-	theme_bw()
-
-ggsave(paste(fig_path,"IQ_OHCblPlus.png", sep = ""),width = 6, height = 3)
-
 
 #############################################################
 # linear regression: analysis of factor variables (above only numeric variables are analysed)
@@ -1062,11 +1012,6 @@ ggplot(data = tbl, aes(x = log(OHCblPlus), y = as.factor(cssModif), fill = as.fa
 	scale_color_aaas() +
 	theme_test()
 
-# ggplot(data = tbl, aes(x = log(OHCblPlus), fill = as.factor(cssModif), color = as.factor(cssModif))) +
-# 	geom_density(alpha = 0.6) +
-# 	scale_fill_aaas() +
-# 	scale_color_aaas() +
-# 	theme_test()
 
 plt_pathwayCorrcCSS <- 
 ggplot(data = tbl, aes(x = log(OHCblPlus), y = as.factor(cCSS), fill = as.factor(cCSS), color = as.factor(cCSS))) +
@@ -1100,99 +1045,6 @@ plt_pathwayCSS <-
 ggarrange(plt_pathwayCorrModcCSS, plt_pathwayCorrcCSS, nrow = 2)
 
 ggsave(paste(fig_path,"pathwayCorrcCSS_hist.png", sep = ""), plt_pathwayCSS, width = 4, height = 6)
-
-##########################################
-## p-values of clinical associations (cCSS, OHCblPlus, ratio only) David's method
-# ##########################################
-# #ee=fread("interimData/phenotypic_tables/ClinicalInformationTable.csv",header=TRUE,sep=",")
-# ee0=fread("interimData/phenotypic_tables/meta_info_wcss.txt",header=TRUE)
-# # matcher=match(tbl2[,mma_id],ee[,`Cell Line Number`])
-# # ee2=ee[matcher,]
-
-# # set all clinical symptoms (rated as present or absent) to 0, if not reported to be present
-# pres_abs_vars <- c("acidosis", "metabolic_acidosis", "metabolic_ketoacidosis", "ketosis", "hyperammonemia", "abnormal_muscle_tone", "musc_hypotonia", "musc_hypertonia", "hypothermia", "fct_respiratory_abnormality", "dyspnea", "tachypnea", "hyperventilation", "reduced_consciousness", "lethargy", "drowsiness", "somnolence", "coma", "seizures", "general_tonic_clonic_seizure", "any_GI_problem", "feeding_problem", "failure_to_thrive", "vomiting", "dehydration", "any_delay", "motor_delay", "behavioral_abnormality", "irritability", "autistic_behaviour", "concurrent_infection", "dialysis", "hemodialysis", "peritoneal_dialysis", "insulin", "diet", "carnitine", "cobalamin", "bicarb", "glucose_IV", "responsive_to_acute_treatment", "cobalamin_responsive", "protein_restriction", "global_dev_delay_chr", "language_delay", "any_neurological_abnormalities_chronic", "any_neurological_abnormalities_acuteANDchronic", "impaireded_kidney_fct", "hemat_abnormality", "anemia", "neutropenia", "pancytopenia", "skin_abnormalities", "hearing_impairment", "osteoporosis", "failure_to_thrive_chronic")
-# ee1 <- data.frame(ee0)
-# ee1[, pres_abs_vars][is.na(ee1[pres_abs_vars])] <- 0 # replace the NA's with 0
-# ee2 <- data.table(ee1)
-
-# ff=lapply(c(1:dim(ee2)[2]),function(i){
-# 	print(i)
-# 	ee3=as.numeric(unlist(ee2[,i,with=FALSE]))### remove NA's and empty
-# 	ee4=ee3
-# 	myna=is.na(ee4)
-# 	if(sum(!myna)<2 || sd(ee3,na.rm=TRUE)==0){
-# 		return(NULL)
-# 	}
-# 	xx=scale(ee4[!myna])
-# #	yy=tbl2[!myna,log10(OHCblPlus)]
-# 	yy=tbl[!myna,scale(log10(ratio))]
-# 	tt=summary(lm(yy~xx))
-# 	pvalrat=tt$coef[2,4]
-# 	zrat=tt$coef[2,3]
-# 	sloperat=tt$coef[2,1]
-# 	yy=tbl[!myna,scale(log10(OHCblPlus))]
-# 	tt=summary(lm(yy~xx))
-# 	pvalplus=tt$coef[2,4]
-# 	zplus=tt$coef[2,3]
-# 	slopeact=tt$coef[2,1]
-# 	yy=tbl[!myna,scale(cCSS)]
-# 	tt=summary(lm(yy~xx))
-# 	pvalccss=tt$coef[2,4]
-# 	zccss=tt$coef[2,3]
-# 	slopeccss=tt$coef[2,1]
-# 	data.table(pval_ratio=pvalrat, z_ratio=zrat, slope_ratio = sloperat, 
-# 		pval_OHCblPlus=pvalplus, z_OHCblPlus=zplus, slope_OHCblPlus = slopeact, 
-# 		pval_cCSS=pvalccss, z_cCSS=zccss, slope_cCSS=slopeccss,
-# 		myname=names(ee2)[i])
-# })
-# ff2=do.call("rbind",ff)
-# ff3=ff2[3:dim(ff2)[1],]
-# ff4=ff3[,list(myname, pval=pval_ratio, pval_adj=p.adjust(pval_ratio, method = "fdr"), slope=slope_ratio, molecular_variable="PI_ratio")]
-# ff5=ff3[,list(myname, pval=pval_OHCblPlus, pval_adj=p.adjust(pval_OHCblPlus, method = "fdr"), slope=slope_OHCblPlus, molecular_variable="OHCblPlus")]
-# ff6=ff3[,list(myname, pval=pval_cCSS, pval_adj=p.adjust(pval_cCSS, method = "fdr"), slope=slope_cCSS, molecular_variable="cCSS")]
-# ff7=rbind(ff4,ff5,ff6)
-
-# ggplot(data = ff7,aes(x = pval_adj, fill = molecular_variable)) +
-# 	geom_histogram(bins = 20) +
-# 	facet_grid(molecular_variable~.) +
-# 	scale_fill_aaas() +
-# 	ggtitle("Distribution of pvals for all clinical variables") +
-# 	theme_test() +
-# 	guides(fill = FALSE)
-
-# ggsave(paste(fig_path,"pvals_for_clinical_variables_top3.png", sep = ""),width=4,height=4)
-
-# mean(ff4[,pval<0.0125])
-# ff4[pval<0.01,]
-# ff5[pval<0.0125,]
-# ff6[pval_adj<0.0125,]
-# # mynames	pval 	molecular_variable
-# # Age of Onset (d)	8.553449e-05	Ratio
-# # Vit. B12-responsive? 0=no, 1=yes	4.090529e-05	Ratio
-# # Age (months)	7.096545e-04	Ratio
-# # no. of meals/day	1.853398e-07	Ratio
-# # age (months)	2.472534e-04	Ratio
-# # length (cm)	9.022156e-03	Ratio
-# #	myname	pval	molecular_variable
-# #	pH	0.0013084031	Activity\n(saturated)
-# #	Vit. B12-responsive? 0=no, 1=yes	0.0003255492	Activity\n(saturated)
-# fdr_act=0.01/mean(ff5[,pval<0.01])
-# fdr_ratio=0.01/mean(ff4[,pval<0.01])
-
-# #                                    myname         pval molecular_variable
-# #  1:                      Age of Onset (d) 8.553449e-05              Ratio
-# #  2:      Vit. B12-responsive? 0=no, 1=yes 4.090529e-05              Ratio
-# #  3:                          Age (months) 7.096545e-04              Ratio
-# #  4:                      no. of meals/day 1.853398e-07              Ratio
-# #  5:                          age (months) 2.472534e-04              Ratio
-# #  6:                           length (cm) 9.022156e-03              Ratio
-#  7:                                    pH 1.308403e-03           Activity
-#  8:      Vit. B12-responsive? 0=no, 1=yes 3.255492e-04           Activity
-#  9:                            HP:0001263 8.669584e-03           Activity
-# 10: impaired kidney function? 0=no, 1=yes 6.770888e-03           Activity
-
-
-
 
 
 ##################
@@ -1279,19 +1131,6 @@ levels(tbl_disc$variable) <- c("Acidosis", "Hyperventilation", "Developmental de
 
 
 
-# ggplot(tbl_disc, aes(x = as.factor(value), y = log(OHCblPlus))) +
-# 	#geom_boxplot(alpha = 0.6, aes(color = as.factor(value))) +
-# 	geom_violin(alpha = 0.6) +
-# 	geom_jitter(alpha = 0.6, size = 1, width = 0.2, aes(color = type)) +
-# 	facet_wrap(~variable) +
-# 	theme_test() +
-# 	scale_color_aaas() +
-# 	ggtitle("Association of clinical symptoms (discrete) with OHCblPlus")
-
-# ggsave(paste(fig_path,"clinical_variables_disc.png", sep = ""),width=8,height=6)
-
-max(tbl_disc[proposed_gene_wgs!="",]$OHCblPlus)
-
 PIwithDiscvars <- 
 ggplot(tbl_disc[proposed_gene_wgs!="",], aes(x = as.factor(value2), y = OHCblPlus)) +
 	geom_boxplot(alpha = 1, outlier.shape = NA, aes(color = as.factor(value))) +
@@ -1315,11 +1154,7 @@ ggsave(paste(fig_path_pdf, "SuppFig3/","clinical_variables_disc_box.pdf", sep = 
 dev.off()
 
 
-##################
-# plots for some variables to correlate with cCSS
-# cCSS (chronic clinical score) consists of: onset_score, neuro_abnormality, kidney impairment, haematological abnormality, failure to thrive
-
-#≥
+#
 
 tbl_css0 <- ee0x %>% select(c("proposed_gene_wgs", "mma_id", "cCSS", "acidosis", "hyperammonemia", "musc_hypotonia", "fct_respiratory_abnormality", "dehydration", "dehydration", "dialysis", "diet", "carnitine", "bicarb", "glucose_IV", "protein_restriction"))
 tbl_css0 <- data.table(tbl_css0)

@@ -4,6 +4,7 @@ PROTEIN_FILE_PATH1=paste("Data/20190305_PHRT-5_MMA_Normalized-Protein-Report_edi
 RNASEQ_FILE_PATH=paste("Data/MMA_PHRT_R_gene_rpkm.bed",sep="")
 PROTEIN_MAPPING_FILE="Data/HUMAN_9606_idmapping_selected.tab.gz"
 
+# alternatively csv files provided as extended data of the manuscript can be used as input; no need to prepare these matrices.
 
 ##################################################
 ## prepare prot_mat

@@ -11,29 +11,6 @@ library(ggpubr)
 library(viridis)
 
 
-
-#colour_palette
-##blue 
-#82
-#129
-#163
-myblue=rgb(60, 107, 131, maxColorValue = 255)
-#orange
-#231
-#129
-#48
-myorange=rgb(231, 129, 48, maxColorValue = 255)
-#brown
-#180
-#100
-#36
-mybrown=rgb(180, 100, 36, maxColorValue = 255)
-#mygrey
-#212
-#212
-#212
-mygrey=rgb(180, 180, 180, maxColorValue = 255)
-
 # create figures path
 system("mkdir Figs/DEA/")
 system("mkdir Figs/DEA/GSEA/")

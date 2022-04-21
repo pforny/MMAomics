@@ -143,31 +143,6 @@ calculateVarianceExplained(mod) #calculate and return the variance explained by 
 class(MOFA::featureNames(mod))
 summary(MOFA::featureNames(mod))
 
-# name_list <- MOFA::featureNames(mod)
-# gene_list <- name_list[[1]]
-# prot_list <- name_list[[2]]
-# rna_list <- name_list[[3]]
-
-
-# df_gene <- select(hs, keys = gene_list, columns = c("SYMBOL"), keytype = "ENSEMBL")
-# colnames(df_gene)
-# summary(is.na(df_gene$SYMBOL))
-# df_gene <- distinct(df_gene, ENSEMBL, .keep_all = TRUE)
-
-# df_prot <- select(hs, keys = prot_list, columns = c("SYMBOL"), keytype = "ENSEMBL")
-# colnames(df_prot)
-# summary(is.na(df_prot$SYMBOL))
-# df_prot <- distinct(df_prot, ENSEMBL, .keep_all = TRUE)
-
-# df_rna <- select(hs, keys = rna_list, columns = c("SYMBOL"), keytype = "ENSEMBL")
-# colnames(df_rna)
-# summary(is.na(df_rna$SYMBOL))
-# df_rna <- distinct(df_rna, ENSEMBL, .keep_all = TRUE)
-
-# name_list[[1]] <- df_gene$SYMBOL
-# name_list[[2]] <- df_prot$SYMBOL
-# name_list[[3]] <- df_rna$SYMBOL
-# MOFA::featureNames(mod) <- name_list
 
 
 #############################################

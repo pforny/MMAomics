@@ -79,18 +79,6 @@ rna_DEA[,p_theor:=rank(pval)/(dim(rna_DEA)[1]+1)]
 ### samples with low pathway activity are mostly MMUT deficient samples
 ### betas and pval according to DL's fast_lmm model
 
-# use automated enhanced volcano package
-# EnhancedVolcano(rna_DEA,
-#     lab = rna_DEA$gname,
-#     x = 'betas',
-#     y = 'pval',
-#     pCutoff = 10e-2,
-#     FCcutoff = 0.2,
-#     xlim = c(-1, 1),
-#     ylim = c(0,6),
-#     title = "MMAomics volcano plot",
-#     subtitle = "Differential expression",
-#     xlab = bquote('Effect size (betas)'))
 
 
 # create gene lists of interest
@@ -169,19 +157,6 @@ prot_DEA[!is.na(label3), ]
 # plots volcanos for RNA and protein (limited genes of interest)
 
 
-# rna_FDR_pulldown <- 
-# ggplot(rna_DEA, aes(x = -log10(p_theor), y = -log10(pval), color = inpulldown)) +
-#   geom_abline(intercept = 0, slope = 1) +
-#   geom_abline(aes(intercept = 1, slope = 1, color = "FDR<0.1"), linetype = 2) +
-#   geom_point() +
-#   xlab("-log10(p-value) (theoretical)") +
-#   ylab("-log10(p-value) (empirical)") +
-#   ggtitle("DEA (PI activity) transcriptomics") +
-#   geom_text_repel(data = rna_DEA[!is.na(label4), ], aes(label = gname), nudge_x = 0, nudge_y = 0.5, show.legend = FALSE) +
-#   scale_color_manual(values = c("black", mypal[c(5,2,9)]), guide = guide_legend(override.aes = list(pch = c(NA, 16, 16, 16), linetype = c(2, 0,0,0)))) +
-#   theme_pubr() +
-#   theme(plot.title = element_text(size = 12), legend.position = c(0.26, 0.8), legend.title = element_blank(), legend.background = element_rect(fill = alpha('blue', 0)))
-
 rna_FDR <- 
 ggplot(rna_DEA, aes(x = -log10(p_theor), y = -log10(pval))) +
   geom_abline(intercept = 0, slope = 1) +
@@ -194,20 +169,6 @@ ggplot(rna_DEA, aes(x = -log10(p_theor), y = -log10(pval))) +
   geom_text_repel(data = rna_DEA[!is.na(label4), ], aes(label = gname), nudge_x = 0, nudge_y = 0.5, show.legend = FALSE) +
   theme_pubr() +
   theme(plot.title = element_text(size = 12), legend.position = c(0.26, 0.9), legend.title = element_blank(), legend.background = element_rect(fill = alpha('blue', 0)))
-
-
-# prot_FDR_pulldown <- 
-# ggplot(prot_DEA, aes(x = -log10(p_theor), y = -log10(pval), color = inpulldown)) +
-#   geom_abline(intercept = 0, slope = 1) +
-#   geom_abline(aes(intercept = 1, slope = 1, color = "FDR<0.1"), linetype = 2) +
-#   geom_point() +
-#   xlab("-log10(p-value) (theoretical)") +
-#   ylab("-log10(p-value) (empirical)") +
-#   ggtitle("DEA (PI activity) proteomics") +
-#   geom_text_repel(data = prot_DEA[!is.na(label4), ], aes(label = gname), nudge_x = 0, nudge_y = 0.5, show.legend = FALSE) +
-#   scale_color_manual(values = c("black", mypal[c(5,2,9)]), guide = guide_legend(override.aes = list(pch = c(NA, 16, 16, 16), linetype = c(2, 0,0,0)))) +
-#   theme_pubr() +
-#   theme(plot.title = element_text(size = 12), legend.position = c(0.26, 0.8), legend.title = element_blank(), legend.background = element_rect(fill = alpha('blue', 0)))
 
 prot_FDR <- 
 ggplot(prot_DEA, aes(x = -log10(p_theor), y = -log10(pval))) +
@@ -228,23 +189,6 @@ ggplot(prot_DEA, aes(x = -log10(p_theor), y = -log10(pval))) +
 p0 <- 0.01
 
 
-# dea_trans_pulldown <- 
-# ggplot(rna_DEA, aes(x = -betas, y = -log10(pval), color = inpulldown)) +
-#   geom_hline(yintercept = -log10(p0), linetype = "dashed", alpha = 0.6) +
-#   geom_vline(xintercept = 0.2, linetype = "dashed", alpha = 0.6) +
-#   geom_vline(xintercept = -0.2, linetype = "dashed", alpha = 0.6) +
-#   geom_point(alpha = 0.2) +
-#   geom_point(data = rna_DEA[!is.na(label_rnaUP), ], size = 3) +
-#   geom_text_repel(data = rna_DEA[!is.na(label_rnaUP), ], aes(label = gname), nudge_x = 0.1, nudge_y = 0.5) +
-#   geom_point(data = rna_DEA[!is.na(label_rnaDOWN), ], size = 3) +
-#   geom_text_repel(data = rna_DEA[!is.na(label_rnaDOWN), ], aes(label = gname), nudge_x = 0, nudge_y = 0.5) +
-#   xlab("Effect size") +
-#   ylab("-log10(adjusted p value)") +
-#   xlim(-0.45, 0.45) +
-#   ylim(0, 6) +
-#   scale_color_manual(values = mypal[c(5,2,9)]) +
-#   theme_pubr() +
-#   theme(plot.title = element_text(size = 12), legend.position = "none", legend.title = element_blank())
 
 dea_trans <- 
 ggplot(rna_DEA, aes(x = -betas, y = -log10(pval))) +
@@ -263,24 +207,6 @@ ggplot(rna_DEA, aes(x = -betas, y = -log10(pval))) +
   theme(plot.title = element_text(size = 12), legend.position = "none", legend.title = element_blank())
 
 
-# dea_prot_pulldown <- 
-# ggplot(prot_DEA, aes(x = -betas, y = -log10(pval), color = inpulldown)) +
-#   geom_hline(yintercept = -log10(p0), linetype = "dashed", alpha = 0.6) +
-#   geom_vline(xintercept = 0.2, linetype = "dashed", alpha = 0.6) +
-#   geom_vline(xintercept = -0.2, linetype = "dashed", alpha = 0.6) +
-#   geom_point(alpha = 0.2) +
-#   geom_point(data = prot_DEA[!is.na(label_protUP), ], size = 3) +
-#   geom_text_repel(data = prot_DEA[!is.na(label_protUP), ], aes(label = gname), nudge_x = -0.1, nudge_y = 0.5) +
-#   geom_point(data = prot_DEA[!is.na(label_protDOWN), ], size = 3) +
-#   geom_text_repel(data = prot_DEA[!is.na(label_protDOWN), ], aes(label = gname), nudge_x = 0, nudge_y = 0.5) +
-#   xlab("Effect size") +
-#   ylab("-log10(adjusted p value)") +
-#   xlim(-0.45, 0.45) +
-#   ylim(0, 6) +
-#   scale_color_manual(values = mypal[c(5,2,9)]) +
-#   theme_pubr() +
-#   theme(plot.title = element_text(size = 12), legend.position = "none", legend.title = element_blank())
-
 dea_prot <- 
 ggplot(prot_DEA, aes(x = -betas, y = -log10(pval))) +
   geom_hline(yintercept = -log10(p0), linetype = "dashed", alpha = 0.6) +
@@ -298,44 +224,6 @@ ggplot(prot_DEA, aes(x = -betas, y = -log10(pval))) +
   theme(plot.title = element_text(size = 12), legend.position = "none", legend.title = element_blank())
 
 
-
-
-# dea_trans <- 
-# ggplot(rna_DEA, aes(x = -betas, y = -log10(pval))) +
-#   geom_hline(yintercept = -log10(p0), linetype = "dashed", alpha = 0.6) +
-#   geom_vline(xintercept = 0.2, linetype = "dashed", alpha = 0.6) +
-#   geom_vline(xintercept = -0.2, linetype = "dashed", alpha = 0.6) +
-#   geom_point(alpha = 0.2) +
-#   geom_point(data = rna_DEA[!is.na(label_rnaUP), ], inherit.aes = FALSE, aes(x = -betas, y = -log10(pval)), color = mypal2[1], size = 3) +
-#   geom_text_repel(data = rna_DEA[!is.na(label_rnaUP), ], aes(label = gname), color = mypal2[1], nudge_x = 0.1, nudge_y = 0.5) +
-#   geom_point(data = rna_DEA[!is.na(label_rnaDOWN), ], inherit.aes = FALSE, aes(x = -betas, y = -log10(pval)), color = mypal2[3], size = 3) +
-#   geom_text_repel(data = rna_DEA[!is.na(label_rnaDOWN), ], aes(label = gname), color = mypal2[3], nudge_x = 0, nudge_y = 0.5) +
-#   ggtitle("DEA (PI activity) transcriptomics") +
-#   xlab("Effect size") +
-#   ylab("-log10(adjusted p value)") +
-#   xlim(-0.45, 0.45) +
-#   ylim(0, 6) +
-#   theme_pubr() +
-#   theme(plot.title = element_text(size = 12))
-
-
-# dea_prot <- 
-# ggplot(prot_DEA, aes(x = -betas, y = -log10(pval))) +
-#   geom_hline(yintercept = -log10(p0), linetype = "dashed", alpha = 0.6) +
-#   geom_vline(xintercept = 0.2, linetype = "dashed", alpha = 0.6) +
-#   geom_vline(xintercept = -0.2, linetype = "dashed", alpha = 0.6) +
-#   geom_point(alpha = 0.2) +
-#   geom_point(data = prot_DEA[!is.na(label_protUP), ], inherit.aes = FALSE, aes(x = -betas, y = -log10(pval)), color = mypal2[1], size = 3) +
-#   geom_text_repel(data = prot_DEA[!is.na(label_protUP), ], aes(label = gname), color = mypal2[1], nudge_x = -0.1, nudge_y = 0.5) +
-#   geom_point(data = prot_DEA[!is.na(label_protDOWN), ], inherit.aes = FALSE, aes(x = -betas, y = -log10(pval)), color = mypal2[3], size = 3) +
-#   geom_text_repel(data = prot_DEA[!is.na(label_protDOWN), ], aes(label = gname), color = mypal2[3], nudge_x = 0, nudge_y = 0.5) +
-#   ggtitle("DEA (PI activity) proteomics") +
-#   xlab("Effect size") +
-#   ylab("-log10(adjusted p value)") +
-#   xlim(-0.45, 0.45) +
-#   ylim(0, 6) +
-#   theme_pubr() +
-#   theme(plot.title = element_text(size = 12))
 
 
 dea_plt_main <- 

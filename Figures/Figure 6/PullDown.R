@@ -13,32 +13,6 @@ library(UpSetR)
 
 
 
-
-
-
-#colour_palette
-##blue 
-#82
-#129
-#163
-myblue=rgb(60, 107, 131, maxColorValue = 255)
-#orange
-#231
-#129
-#48
-myorange=rgb(231, 129, 48, maxColorValue = 255)
-#brown
-#180
-#100
-#36
-mybrown=rgb(180, 100, 36, maxColorValue = 255)
-#mygrey
-#212
-#212
-#212
-mygrey=rgb(180, 180, 180, maxColorValue = 255)
-
-
 mypal <- pal_aaas("default", alpha = 1)(9)
 mypal2 <- pal_npg("nrc", alpha = 1)(9)
 
@@ -200,33 +174,6 @@ venn_list <- list(EV = sum_tbl1[sum_tbl1$EV != 0, ]$mod_name,
 	)
 
 
-# prepare data/list for upset plot
-# upset_list <- list(EV = sum_tbl1[sum_tbl1$EV != 0, ]$mod_name,
-# 	MCEE = sum_tbl1[sum_tbl1$MCEE != 0, ]$mod_name,
-# 	MMAA = sum_tbl1[sum_tbl1$MMAA != 0, ]$mod_name,
-# 	MMAB = sum_tbl1[sum_tbl1$MMAB != 0, ]$mod_name,
-# 	MMUT = sum_tbl1[sum_tbl1$MMUT != 0, ]$mod_name,
-# 	VLCAD = sum_tbl1[sum_tbl1$VLCAD != 0, ]$mod_name
-# 	)
-
-
-
-# using gplots package to generate intersection list # doesn't work
-# itemsList <- venn(venn_list, show.plot = FALSE)
-# lengths(attributes(itemsList)$intersections)
-
-# p <- calculate.overlap(venn_list)
-# p
-
-# combs <- 
-#   unlist(lapply(1:length(venn_list), 
-#                 function(j) combn(names(venn_list), j, simplify = FALSE)),
-#          recursive = FALSE)
-# names(combs) <- sapply(combs, function(i) paste0(i, collapse = ""))
-# str(combs)
-# combs$1
-
-
 
 #########################################
 #########################################
@@ -282,11 +229,6 @@ ggplot(tbl_mmut[aov_pval != 1, ], aes(x = mod_name, y = aov_pval)) +
 	theme_pubr() +
 	theme(axis.text.x = element_blank(), axis.ticks.x = element_blank(), legend.position = c(0.4, 0.9), legend.title = element_blank(), plot.title = element_text(size = 12))
 
-# pull_pvalues <- 
-# ggarrange(pval_hist, pval_ranks)
-
-# ggsave(paste(fig_path,"pvalsPullDown.png", sep = ""), pull_pvalues, width = 6.5, height = 3)
-# dev.off()
 
 ggsave(paste(fig_path,"pvalsRankedPullDown.png", sep = ""), pval_ranks, width = 3.5, height = 3)
 dev.off()
@@ -365,7 +307,6 @@ upset(fromList(venn_list), nsets = 5)
 pdf(paste0(fig_path_pdf,"upsetPullDown.pdf"), width = 6, height = 5)
 upset(fromList(venn_list), nsets = 5)
 dev.off()
-
 
 
 
