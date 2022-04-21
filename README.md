@@ -30,4 +30,5 @@ The repository is structured according to the figures as presented in the paper.
 10. Validation of CRISPR knock-out 293T cell lines.
 11. Stable isotope labeling of glutamine shows preferential reductive cycling of glutamine derived carbons in MMUT deficiency.
 12. Immunoprecipitation of flag-tagged MMUT shows pulldown of DLST.
+
 (10-12. no data analyses)
