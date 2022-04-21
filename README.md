@@ -1,4 +1,6 @@
-# MMAomics - a multi-omics study on the rare inborn error of metabolism methylmalonic aciduria (MMA)
+# Integrated multi-omics reveals anaplerotic insufficiency in methylmalonyl-CoA mutase deficiency
+
+## MMAomics - a multi-omics study on the rare inborn error of metabolism methylmalonic aciduria (MMA)
 
 This repository provides all R scripts used to analyse multi-omics and phenotype datasets in Forny et al. 2022. A [pre-print](
 https://www.medrxiv.org/content/10.1101/2022.01.27.22269972) of the publication has been deposited on the medRxiv server.
@@ -27,3 +29,5 @@ The repository is structured according to the figures as presented in the paper.
 9. Metabolomics investigation of a subset of patient cell lines and glutamine flux studies in 293T CRISPR-KO cells.
 10. Validation of CRISPR knock-out 293T cell lines.
 11. Stable isotope labeling of glutamine shows preferential reductive cycling of glutamine derived carbons in MMUT deficiency.
+12. Immunoprecipitation of flag-tagged MMUT shows pulldown of DLST.
+(10-12. no data analyses)
