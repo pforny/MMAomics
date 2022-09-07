@@ -35,4 +35,4 @@ The repository is structured according to the figures as presented in the paper.
 15. MMUT-flag is enzymatically active and pulls down other propionate pathway proteins using immunoprecipitation.
 16. Quantitative pull-down results following affinity purification mass spectrometry and confirmation of DLST pull-down by MMUT-flag by immunoprecipitation.
 
-(10.-16. no data analyses)
+(10.-15. no data analyses. For 16. check Main Figure 6 folder)
