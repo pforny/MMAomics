@@ -26,9 +26,13 @@ The repository is structured according to the figures as presented in the paper.
 6. Transcriptomics analysis of mouse brain revealed sample clustering according to genotype.
 7. Significantly dysregulated proteins were enriched for for mitochondrial localization.
 8. Transcript-protein and protein-protein correlation analysis illustrates coordinated regulation of MMUT with most TCA transcripts and proteins.
-9. Metabolomics investigation of a subset of patient cell lines and glutamine flux studies in 293T CRISPR-KO cells.
+9. Metabolomics investigation of a subset of patient cell lines.
 10. Validation of CRISPR knock-out 293T cell lines.
-11. Stable isotope labeling of glutamine shows preferential reductive cycling of glutamine derived carbons in MMUT deficiency.
-12. Immunoprecipitation of flag-tagged MMUT shows pulldown of DLST.
+11. Metabolomics and glutamine labelling in 293T cells.
+12. Labelling patterns derived from [U-13C]glutamine in primary patient and control fibroblasts.
+13. Treatment of primary patient and control fibroblasts.
+14. Fractional labeling pattern derived from glutamine in 293T and primary fibroblast cells upon treatment.
+15. MMUT-flag is enzymatically active and pulls down other propionate pathway proteins using immunoprecipitation.
+16. Quantitative pull-down results following affinity purification mass spectrometry and confirmation of DLST pull-down by MMUT-flag by immunoprecipitation.
 
-(10.-12. no data analyses)
+(10.-16. no data analyses)
